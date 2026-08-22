@@ -22,7 +22,7 @@ pipeline {
                 always {
                     script {
                         emailext(
-                            to: 's98098126@deakin.edu.au',
+                            to: 'livingnaturallywithkaitlin@gmail.com',
                             subject: "Jenkins - Run Tests: ${currentBuild.currentResult} - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                             body: """
                                 <h3>Run Tests Stage</h3>
@@ -55,7 +55,7 @@ pipeline {
                 always {
                     script {
                         emailext(
-                            to: 's98098126@deakin.edu.au',
+                            to: 'livingnaturallywithkaitlin@gmail.com',
                             subject: "Jenkins - NPM Audit: ${currentBuild.currentResult} - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                             body: """
                                 <h3>NPM Audit (Security Scan)</h3>
@@ -79,7 +79,7 @@ pipeline {
     post {
         always {
             emailext(
-                to: 's98098126@deakin.edu.au',
+                to: 'livingnaturallywithkaitlin@gmail.com',
                 subject: "Jenkins Build Finished: ${currentBuild.currentResult} - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: "Build completed with status: ${currentBuild.currentResult}<br>Check console: ${env.BUILD_URL}",
                 mimeType: 'text/html',
