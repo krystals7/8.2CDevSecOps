@@ -1,12 +1,6 @@
 pipeline {
     agent any
 
-    // Optional but recommended – inject Snyk token securely
-    environment {
-        // Create a "Secret text" credential in Jenkins with ID = snyk-token
-        SNYK_TOKEN = credentials('snyk-token')
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -22,7 +16,6 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                // Remove || exit /b 0 once Snyk is authenticated
                 bat 'npm test || exit /b 0'
             }
             post {
@@ -48,7 +41,6 @@ pipeline {
 
         stage('Generate Coverage Report') {
             steps {
-                // Keep || exit /b 0 for now until you add the script
                 bat 'npm run coverage || exit /b 0'
             }
         }
@@ -79,7 +71,6 @@ pipeline {
         }
     }
 
-    // Optional: final notification for the whole pipeline
     post {
         always {
             echo "Pipeline finished with status: ${currentBuild.currentResult}"
