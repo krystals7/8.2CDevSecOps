@@ -1,0 +1,90 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/krystals7/8.2CDevSecOps.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                bat 'npm install'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                bat 'npm test || exit /b 0'
+            }
+            post {
+                always {
+                    script {
+                        emailext(
+                            to: 's98098126@deakin.edu.au',
+                            subject: "Jenkins - Run Tests: ${currentBuild.currentResult} - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                            body: """
+                                <h3>Run Tests Stage</h3>
+                                <p><b>Status:</b> ${currentBuild.currentResult}</p>
+                                <p><b>Job:</b> ${env.JOB_NAME}</p>
+                                <p><b>Build:</b> #${env.BUILD_NUMBER}</p>
+                                <p><b>Build URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                                <p>See the attached build log for full details.</p>
+                            """,
+                            mimeType: 'text/html',
+                            attachLog: true,
+                            compressLog: true
+                        )
+                    }
+                }
+            }
+        }
+
+        stage('Generate Coverage Report') {
+            steps {
+                bat 'npm run coverage || exit /b 0'
+            }
+        }
+
+        stage('NPM Audit (Security Scan)') {
+            steps {
+                bat 'npm audit || exit /b 0'
+            }
+            post {
+                always {
+                    script {
+                        emailext(
+                            to: 's98098126@deakin.edu.au',
+                            subject: "Jenkins - NPM Audit: ${currentBuild.currentResult} - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                            body: """
+                                <h3>NPM Audit (Security Scan)</h3>
+                                <p><b>Status:</b> ${currentBuild.currentResult}</p>
+                                <p><b>Job:</b> ${env.JOB_NAME}</p>
+                                <p><b>Build:</b> #${env.BUILD_NUMBER}</p>
+                                <p><b>Build URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                                <p>See the attached build log for full details (including any known CVEs).</p>
+                            """,
+                            mimeType: 'text/html',
+                            attachLog: true,
+                            compressLog: true
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    // Optional: also send a final summary email
+    post {
+        always {
+            emailext(
+                to: 's98098126@deakin.edu.au',
+                subject: "Jenkins Build Finished: ${currentBuild.currentResult} - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: "Build completed with status: ${currentBuild.currentResult}<br>Check console: ${env.BUILD_URL}",
+                mimeType: 'text/html',
+                attachLog: true
+            )
+        }
+    }
+}
