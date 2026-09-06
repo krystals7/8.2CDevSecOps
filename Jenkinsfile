@@ -8,7 +8,7 @@ pipeline {
             }
             post {
                 success {
-                    mail to: 'livingnaturallywithkaitlin@gmail.com',
+                    mail to: "livingnaturallywithkaitlin@gmail.com",
                          subject: "Jenkins Pipeline - Build Stage: SUCCESS",
                          body: "Stage: Build\nStatus: SUCCESS\nBuild URL: ${env.BUILD_URL}"
                 }
@@ -21,7 +21,7 @@ pipeline {
             }
             post {
                 success {
-                    mail to: 'livingnaturallywithkaitlin@gmail.com',
+                    mail to: "livingnaturallywithkaitlin@gmail.com",
                          subject: "Jenkins Pipeline - Unit and Integration Tests Stage: SUCCESS",
                          body: "Stage: Unit and Integration Tests\nStatus: SUCCESS\nBuild URL: ${env.BUILD_URL}"
                 }
@@ -34,7 +34,7 @@ pipeline {
             }
             post {
                 success {
-                    mail to: 'livingnaturallywithkaitlin@gmail.com',
+                    mail to: "livingnaturallywithkaitlin@gmail.com",
                          subject: "Jenkins Pipeline - Code Analysis Stage: SUCCESS",
                          body: "Stage: Code Analysis\nStatus: SUCCESS\nBuild URL: ${env.BUILD_URL}"
                 }
@@ -47,7 +47,7 @@ pipeline {
             }
             post {
                 success {
-                    mail to: 'livingnaturallywithkaitlin@gmail.com',
+                    mail to: "livingnaturallywithkaitlin@gmail.com",
                          subject: "Jenkins Pipeline - Security Scan Stage: SUCCESS",
                          body: "Stage: Security Scan\nStatus: SUCCESS\nBuild URL: ${env.BUILD_URL}"
                 }
@@ -60,7 +60,7 @@ pipeline {
             }
             post {
                 success {
-                    mail to: 'livingnaturallywithkaitlin@gmail.com',
+                    mail to: "livingnaturallywithkaitlin@gmail.com",
                          subject: "Jenkins Pipeline - Deploy to Staging Stage: SUCCESS",
                          body: "Stage: Deploy to Staging\nStatus: SUCCESS\nBuild URL: ${env.BUILD_URL}"
                 }
@@ -73,7 +73,7 @@ pipeline {
             }
             post {
                 success {
-                    mail to: 'livingnaturallywithkaitlin@gmail.com',
+                    mail to: "livingnaturallywithkaitlin@gmail.com",
                          subject: "Jenkins Pipeline - Integration Tests on Staging Stage: SUCCESS",
                          body: "Stage: Integration Tests on Staging\nStatus: SUCCESS\nBuild URL: ${env.BUILD_URL}"
                 }
@@ -86,7 +86,7 @@ pipeline {
             }
             post {
                 success {
-                    mail to: 'livingnaturallywithkaitlin@gmail.com',
+                    mail to: "livingnaturallywithkaitlin@gmail.com",
                          subject: "Jenkins Pipeline - Deploy to Production Stage: SUCCESS",
                          body: "Stage: Deploy to Production\nStatus: SUCCESS\nBuild URL: ${env.BUILD_URL}"
                 }
