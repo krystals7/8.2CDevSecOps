@@ -9,7 +9,7 @@ pipeline {
             post {
                 success {
                     mail to: "livingnaturallywithkaitlin@gmail.com",
-                         subject: "Jenkins Pipeline - Build Stage: SUCCESS",
+                         subject: "Jenkins Pipeline - Build Stage: SUCCESS!",
                          body: "Stage: Build\nStatus: SUCCESS\nBuild URL: ${env.BUILD_URL}"
                 }
             }
