@@ -22,7 +22,7 @@ pipeline {
             post {
                 success {
                     mail to: "livingnaturallywithkaitlin@gmail.com",
-                         subject: "Jenkins Pipeline - Unit and Integration Tests Stage: SUCCESS",
+                         subject: "Jenkins Pipeline - Unit and Integration Tests Stage: SUCCESS!",
                          body: "Stage: Unit and Integration Tests\nStatus: SUCCESS\nBuild URL: ${env.BUILD_URL}"
                 }
             }
